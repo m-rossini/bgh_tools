@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<content-handler>
+    <xml-paths>
+		<!-- Handles Invoice and Account Block -->
+		<path value="/IFD/GeneralInformation"
+			handler="br.com.auster.tim.bgh.sax.InvoiceAndAccountHandler" />
+
+		<!-- Handles NF for TIM -->
+		<path value="/IFD/GeneralInformation/NFHeader"
+			handler="br.com.auster.tim.bgh.sax.NFHeaderHandler" />
+		<path value="/IFD/GeneralInformation/NFHeader/ServicesSummary"
+			handler="br.com.auster.tim.bgh.sax.TIMNFSubscriptionHandler" />
+		<path value="/IFD/GeneralInformation/NFHeader/ServicesSummary"
+			handler="br.com.auster.tim.bgh.sax.NFContractServicesHandler" />
+		<path value="/IFD/GeneralInformation/NFHeader"
+			handler="br.com.auster.tim.bgh.sax.NFGroupAndItemsHandler" />
+		<path value="/IFD/GeneralInformation/NFHeader"
+			handler="br.com.auster.tim.bgh.sax.NFOCCGroupHandler" />
+		<path value="/IFD/GeneralInformation/NFHeader"
+			handler="br.com.auster.tim.bgh.sax.PromotionPackageHandler" />
+		<path value="/IFD/GeneralInformation/NFHeader"
+			handler="br.com.auster.tim.bgh.sax.NFFreeUnitHandler" />
+		<path value="/IFD/GeneralInformation/SummaryOfNotasFiscais"
+			handler="br.com.auster.tim.bgh.sax.IndividualNFHandler" />
+		<path value="/IFD/GeneralInformation/TaxSummary"
+			handler="br.com.auster.tim.bgh.sax.NFTaxesHandler" />
+
+		<!-- Handles NF for Long Distance Carriers -->
+		<path value="/IFD/GeneralInformation/LDCNFHeader"
+			handler="br.com.auster.tim.bgh.sax.NFHeaderHandler" />
+		<path value="/IFD/GeneralInformation/LDCNFHeader"
+			handler="br.com.auster.tim.bgh.sax.NFGroupAndItemsHandler" />
+		<path value="/IFD/GeneralInformation/LDCNFHeader"
+			handler="br.com.auster.tim.bgh.sax.NFOCCGroupHandler" />
+		<path value="/IFD/GeneralInformation/LDCNFHeader/Services"
+			handler="br.com.auster.tim.bgh.sax.NFContractServicesHandler" />
+		<path value="/IFD/GeneralInformation/LDCNFHeader/ServicesSubTotal"
+			handler="br.com.auster.tim.bgh.sax.NFContractServicesHandler" />
+		<path value="/IFD/GeneralInformation/LDCNFHeader"
+			handler="br.com.auster.tim.bgh.sax.NFFreeUnitHandler" />
+		<path value="/IFD/GeneralInformation/LDCNFHeader/TaxSummary"
+			handler="br.com.auster.tim.bgh.sax.NFTaxesHandler" />
+
+		<!-- Handles Paystub Block -->
+		<path value="/IFD/GeneralInformation/PayStubInformation"
+			handler="br.com.auster.tim.bgh.sax.PaystubHandler" />
+
+		<!-- Handles Details Block -->
+		<path value="/IFD/GeneralInformation/Details"
+			handler="br.com.auster.tim.bgh.sax.InvoiceDetailsHandler" />
+		<path value="/IFD/GeneralInformation/Details/ContractInfo"
+			handler="br.com.auster.tim.bgh.sax.InvoiceContractDetailsHandler" />
+		<path value="/IFD/GeneralInformation/Details/ContractInfo/UsageGroup"
+			handler="br.com.auster.tim.bgh.sax.ContractUsageGroupHandler" />
+		<path value="/IFD/GeneralInformation/Details/ContractInfo/UsageGroup/OneCall"
+			handler="br.com.auster.tim.bgh.sax.ContractUsageDetailsHandler" />
+
+		<!-- Handles TotalsPerContract Block -->
+		<path value="/IFD/GeneralInformation/ContractSubscription"
+			handler="br.com.auster.tim.bgh.sax.TotalsPerContractHandler" />
+		<path value="/IFD/GeneralInformation/ContractServices"
+			handler="br.com.auster.tim.bgh.sax.TotalsPerContractHandler" />
+		<path value="/IFD/GeneralInformation/ContractOCC"
+			handler="br.com.auster.tim.bgh.sax.TotalsPerContractHandler" />
+		<path value="/IFD/GeneralInformation/ContractDiscounts"
+			handler="br.com.auster.tim.bgh.sax.TotalsPerContractHandler" />
+		<path value="/IFD/GeneralInformation/ContractFU"
+			handler="br.com.auster.tim.bgh.sax.TotalsPerContractHandler" />
+		<path value="/IFD/GeneralInformation/ContractTotal"
+			handler="br.com.auster.tim.bgh.sax.TotalsPerContractHandler" />
+    </xml-paths>
+</content-handler>

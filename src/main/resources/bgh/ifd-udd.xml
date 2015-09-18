@@ -1,0 +1,924 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<sdd:document name="IFD"
+   description="Mapeamento do formato IFD da TIM."
+   xmlns:sdd="http://www.auster.com.br/udd/TaggedFileReader/" descriptor-version="0.1.0"
+   descriptor-date="2006/04/01" descriptor-author="Auster Solutions do Brasil LTDA"
+   encoding-from="ISO-8859-1" max-record-size="16384" buffer-size="262144" separator-char="\n"
+   quiet-missing="true" print-key="true">
+
+  <sdd:key-definition separator="^">
+    <sdd:attribute name="key" index="1"/>
+  </sdd:key-definition>
+
+   <sdd:key start-key="00000000" end-key="99999998" name="GeneralInformation" separator="^">
+      <attribute  name="sectionID" index="2" />
+      <attribute  name="typeOfCustomer" index="3" />
+      <attribute  name="billMedium" index="4" />
+      <attribute  name="negativeAmountStub" index="5" />
+      <attribute  name="timOperatorID" index="6" />
+      <attribute  name="paymentMethod" index="7" />
+      <attribute  name="customerID" index="8" />
+      <attribute  name="custCode" index="9" />
+      <attribute  name="typeOfDocument" index="10" />
+      <attribute  name="notaFiscalNumber" index="11" />
+      <attribute  name="invoiceIdentification" index="12" />
+      <attribute  name="dueDate" index="13" />
+      <attribute  name="firstBill" index="14" />
+      <attribute  name="prgCode" index="15" />
+      <attribute  name="printBillIndicator" index="16" />
+	  <!-- Since P698 -->
+	  <attribute  name="customerTaxCategory" index="17" />
+
+      <sdd:key start-key="10000000" name="Header" separator="^">
+         <attribute  name="sectionID" index="2" />
+         <attribute  name="documentName" index="3" />
+         <attribute  name="InvoiceIdentifier" index="4" />
+         <attribute trim="false" name="custAddrName" index="5" />
+         <attribute  name="custAddrStreet" index="6" />
+         <attribute  name="custAddrState" index="7" />
+         <attribute  name="custAddrZip" index="8" />
+         <attribute  name="custAddrStreetNo" index="9" />
+         <attribute  name="custAddrComplement" index="10" />
+         <attribute  name="custAddrCity" index="11" />
+         <attribute  name="custAddrCounty" index="12" />
+         <attribute trim="false" name="carrierAddrName" index="13" />
+         <attribute  name="carrierAddrStreet" index="14" />
+         <attribute  name="carrierAddrStreetNo" index="15" />
+         <attribute  name="carrierAddrZip" index="16" />
+         <attribute  name="carrierAddrCity" index="17" />
+         <attribute  name="carrierAddrState" index="18" />
+         <attribute  name="carrierCNPJ" index="19" />
+         <attribute  name="carrierIE" index="20" />
+         <attribute  name="carrierRE" index="21" />
+         <attribute  name="carrierWebAddr" index="22" />
+         <attribute  name="csrNumber" index="23" />
+         <attribute  name="customerDocumentType" index="24" />
+         <attribute  name="custCode" index="25" />
+         <attribute  name="billingPeriodStart" index="26" />
+         <attribute  name="billingPeriodEnd" index="27" />
+         <attribute  name="invoiceDate" index="28" />
+         <attribute  name="dueDate" index="29" />
+         <attribute  name="totalBillAmount" index="30" />
+         <attribute  name="marketingMessage" index="31" />
+		 <attribute  name="cfop" index="32"/>
+      </sdd:key><!-- Header = 10000000 -->
+
+      <sdd:key start-key="11000000" name="SummaryOfNotasFiscais" separator="^">
+         <attribute  name="sectionID" index="2" />
+         <sdd:key start-key="11100000" name="IndividualNotaFiscal" separator="^">
+            <attribute  name="nfNumber" index="2" />
+            <attribute  name="nfAmount" index="3" />
+            <attribute trim="false" name="nfCustAddrName" index="4" />
+            <attribute  name="custAddrStreet" index="5" />
+            <attribute  name="custAddrState" index="6" />
+            <attribute  name="custAddrZip" index="7" />
+            <attribute  name="custAddrStreetNo" index="8" />
+            <attribute  name="custAddrComplement" index="9" />
+            <attribute  name="custAddrCity" index="10" />
+            <attribute  name="nfCustAddrCounty" index="11" />
+
+            <sdd:key start-key="11100100" name="DigitalAuthenticationKey" separator="^">
+               <attribute  name="digitalAuthenticationKey" index="2" />
+            </sdd:key><!-- DigitalAuthenticationKey = 11100100 -->
+         </sdd:key><!-- IndividualNotaFiscal = 11100000 -->
+      </sdd:key><!-- SummaryOfNotasFiscais = 11000000 -->
+
+      <sdd:key start-key="11200000" name="NFHeader" separator="^">
+         <attribute  name="sectionID" index="2" />
+         <attribute  name="documentName" index="3" />
+         <attribute  name="invoiceNumber" index="4" />
+         <attribute trim="false" name="custAddrName" index="5" />
+         <attribute  name="custAddrStreet" index="6" />
+         <attribute  name="custAddrState" index="7" />
+         <attribute  name="custAddrZip" index="8" />
+         <attribute  name="custAddrStreetNo" index="9" />
+         <attribute  name="custAddrComplement" index="10" />
+         <attribute  name="custAddrCity" index="11" />
+         <attribute  name="custAddrCounty" index="12" />
+         <attribute trim="false" name="carrierAddrName" index="13" />
+         <attribute  name="carrierAddrStreet" index="14" />
+         <attribute  name="carrierAddrStreetNo" index="15" />
+         <attribute  name="carrierAddrZip" index="16" />
+         <attribute  name="carrierAddrCity" index="17" />
+         <attribute  name="carrierAddrState" index="18" />
+         <attribute  name="carrierCNPJ" index="19" />
+         <attribute  name="carrierIE" index="20" />
+         <attribute  name="carrierRE" index="21" />
+         <attribute  name="carrierWebAddr" index="22" />
+         <attribute  name="csrNumber" index="23" />
+         <attribute  name="cnpjCPF" index="24" />
+         <attribute  name="custCode" index="25" />
+         <attribute  name="directoryNumber" index="26" />
+         <attribute  name="billingPeriodStart" index="27" />
+         <attribute  name="billingPeriodEnd" index="28" />
+         <attribute  name="invoiceDate" index="29" />
+         <attribute  name="dueDate" index="30" />
+         <attribute  name="totalBillAmount" index="31" />
+         <attribute  name="marketingText" index="32" />
+         <!-- Added by P698 -->
+         <attribute  name="idAutomaticDebt" index="33"/>
+
+         <sdd:key start-key="11200100" name="DigitalAuthenticationKey" separator="^">
+            <attribute  name="digitalAuthenticationKey" index="2" />
+         </sdd:key><!-- DigitalAuthenticationKey = 11200100 -->
+
+		  <!-- 04-JUN-07: This tag was added due to P698 project from TIM. It will not be used for now. -->
+		  <sdd:key start-key="11300000" name="BillingAddress" separator="^">
+			 <attribute  name="sectionID" index="2" />
+			 <attribute  name="custAddrName" index="3" />
+			 <attribute  name="custAddrStreet" index="4" />
+			 <attribute  name="custAddrState" index="5" />
+			 <attribute  name="custAddrZip" index="6" />
+			 <attribute  name="custAddrStreetNo" index="7" />
+			 <attribute  name="custAddrComplement" index="8" />
+			 <attribute  name="custAddrCity" index="9" />
+			 <attribute  name="custAddrCounty" index="10" />
+		  </sdd:key>
+
+	      <sdd:key start-key="12000000" name="ServicesSummary" separator="^">
+	         <attribute  name="sectionID" index="2" />
+	         <sdd:key start-key="12100000" name="Subscription" separator="^">
+	            <attribute  name="ratePlan" index="2" />
+	            <attribute  name="noOfContracts" index="3" />
+	            <attribute  name="noOfDays" index="4" />
+	            <attribute  name="proRationFactor" index="5" />
+	            <attribute  name="grossAmount" index="6" />
+	            <!-- added in Melhorias#02 (01/JUN/2009) -->
+	            <attribute  name="codigoAnatel" index="7" />
+	            <attribute  name="rateplanShdes" index="8" />
+	            <!-- end of Melhorias#02 -->
+	            <sdd:key start-key="12110000" name="SubscriptionTaxes" separator="^">
+	               <attribute  name="taxName" index="2" />
+	               <attribute  name="taxRate" index="3" />
+	               <attribute  name="taxAmount" index="4" />
+	            </sdd:key>
+	         </sdd:key>
+            <sdd:key start-key="12120000" name="SubscriptionSubTotal" separator="^">
+               <attribute  name="subtotalGrossAmount" index="2" />
+            </sdd:key>
+
+	         <sdd:key start-key="12200000" name="Services" separator="^">
+	            <attribute  name="serviceName" index="2" />
+	            <attribute  name="directoryNumber" index="3" />
+	            <attribute  name="contractNumber" index="4" />
+	            <attribute  name="noOfDays" index="5" />
+	            <attribute  name="proRationFactor" index="6" />
+	            <attribute  name="grossAmount" index="7" />
+	            <!-- Field #8 was never mapped -->
+	            <!-- added in Melhorias#02 (01/JUN/2009) -->
+	            <attribute  name="codigoAnatel" index="9" />
+	            <attribute  name="packageShortName" index="10" />
+	            <attribute  name="rateplanShdes" index="11" />
+	            <!-- end of Melhorias#02 -->
+	            <sdd:key start-key="12210000" name="ServicesTaxes" separator="^">
+	               <attribute  name="taxName" index="2" />
+	               <attribute  name="taxRate" index="3" />
+	               <attribute  name="taxAmount" index="4" />
+	            </sdd:key>
+	         </sdd:key><!-- Services = 12200000 -->
+            <sdd:key start-key="12220000" name="ServicesSubTotal" separator="^">
+               <attribute  name="subTotalGrossAmount" index="2" />
+            </sdd:key>
+
+	      </sdd:key><!-- ServicesSummary = 12000000 -->
+
+	      <sdd:key start-key="20000000" name="HomeCallsGroups" separator="^">
+	         <sdd:key start-key="20001000" name="UsageGroups" separator="^">
+	            <attribute  name="usageGroupName" index="2" />
+				<attribute  name="roamingIndicator" index="3" />
+	            <attribute  name="usageGroupTotEvents" index="4" />
+	            <attribute  name="usageGroupTotRoundedDuration" index="5" />
+	            <attribute  name="usageGroupTotActualDuration" index="6" />
+	            <attribute  name="usageGroupTotAmountBeforePromotionsDisc" index="7" />
+	            <attribute  name="usageGroupTotAmountAfterPromotionsDisc" index="8" />
+	            <attribute  name="usageGroupTotPromotionsDiscAmount" index="9" />
+	            <sdd:key start-key="20002000" name="UsageGroupsTaxes" separator="^">
+	               <attribute  name="taxName" index="2" />
+	               <attribute  name="taxRate" index="3" />
+	               <attribute  name="taxAmount" index="4" />
+	            </sdd:key><!--  20002000 -->
+            </sdd:key><!--  20100000 -->
+            <sdd:key start-key="20100000" name="CallSummarySubTotals" separator="^">
+               <attribute  name="subTotalAmountBeforePromotionsDisc" index="2" />
+               <attribute  name="subTotalAmountAfterPromotionsDisc" index="3" />
+               <attribute  name="subTotalPromotionsDiscAmount" index="4" />
+	         </sdd:key><!--  20001000 -->
+	      </sdd:key><!--  20000000 -->
+
+	      <sdd:key start-key="21000000" name="RoamCallsGroups" separator="^">
+	         <sdd:key start-key="21001000" name="UsageGroups" separator="^">
+	            <attribute  name="usageGroupName" index="2" />
+	            <attribute  name="roamingIndicator" index="4" />
+	            <attribute  name="usageGroupTotEvents" index="5" />
+	            <attribute  name="usageGroupTotRoundedDuration" index="6" />
+	            <attribute  name="usageGroupTotActualDuration" index="7" />
+	            <attribute  name="usageGroupTotAmountBeforePromotionsDisc" index="8" />
+	            <attribute  name="usageGroupTotAmountAfterPromotionsDisc" index="9" />
+	            <attribute  name="usageGroupTotPromotionsDiscAmount" index="10" />
+	            <sdd:key start-key="21002000" name="UsageGroupsTaxes" separator="^">
+	               <attribute  name="taxName" index="2" />
+	               <attribute  name="taxRate" index="3" />
+	               <attribute  name="taxAmount" index="4" />
+	            </sdd:key><!--  21002000 -->
+	         </sdd:key><!--  21001000 -->
+            <sdd:key start-key="21100000" name="CallSummarySubTotals" separator="^">
+               <attribute  name="subTotalAmountBeforePromotionsDisc" index="2" />
+               <attribute  name="subTotalAmountAfterPromotionsDisc" index="3" />
+               <attribute  name="subTotalPromotionsDiscAmount" index="4" />
+            </sdd:key><!--  21100000 -->
+	      </sdd:key><!--  21000000 -->
+
+	      <sdd:key start-key="22000000" name="ServiceUsageGroups" separator="^">
+	         <sdd:key start-key="22001000" name="UsageGroups" separator="^">
+	            <attribute  name="usageGroupName" index="2" />
+	            <attribute  name="roamingIndicator" index="3" />
+	            <attribute  name="usageGroupTotEvents" index="4" />
+	            <attribute  name="usageGroupTotRoundedDuration" index="5" />
+	            <attribute  name="usageGroupTotActualDuration" index="6" />
+	            <attribute  name="usageGroupTotAmountBeforePromotionsDisc" index="7" />
+	            <attribute  name="usageGroupTotAmountAfterPromotionsDisc" index="8" />
+	            <attribute  name="usageGroupTotPromotionsDiscAmount" index="9" />
+	            <sdd:key start-key="22002000" name="UsageGroupsTaxes" separator="^">
+	               <attribute  name="taxName" index="2" />
+	               <attribute  name="taxRate" index="3" />
+	               <attribute  name="taxAmount" index="4" />
+	            </sdd:key><!--  22002000 -->
+	         </sdd:key><!--  22001000 -->
+             <sdd:key start-key="22100000" name="UsageServiceTotalAmount" separator="^">
+                <attribute  name="subTotalAmountBeforePromotionsDisc" index="2" />
+                <attribute  name="subTotalAmountAfterPromotionsDisc" index="3" />
+                <attribute  name="subTotalPromotionsDiscAmount" index="4" />
+             </sdd:key><!--  22100000 -->
+	      </sdd:key><!--  22000000 -->
+
+	      <sdd:key start-key="23000000" name="TotalUsageAmount" separator="^">
+	         <attribute  name="totAmountBeforePromotionsDisc" index="2" />
+	         <attribute  name="totAmountAfterPromotionsDisc" index="3" />
+	         <attribute  name="totPromotionsDiscAmount" index="4" />
+	      </sdd:key><!--  23000000 -->
+
+	      <sdd:key start-key="30000000" name="OCCSubscription" separator="^">
+	         <attribute  name="occDescription" index="2" />
+	         <attribute  name="grossAmount" index="3" />
+	         <attribute  name="noOfEvents" index="4" />
+	         <sdd:key start-key="30100000" name="OCCTaxes" separator="^">
+	            <attribute  name="taxName" index="2" />
+	            <attribute  name="taxRate" index="3" />
+	            <attribute  name="taxAmount" index="4" />
+	         </sdd:key><!--  30100000 -->
+	      </sdd:key><!--  30000000 -->
+
+	      <sdd:key start-key="31000000" name="OCCOther" separator="^">
+	         <attribute  name="occDescription" index="2" />
+	         <attribute  name="grossAmount" index="3" />
+	         <attribute  name="noOfEvents" index="4" />
+	         <sdd:key start-key="31100000" name="OCCTaxes" separator="^">
+	            <attribute  name="taxName" index="2" />
+	            <attribute  name="taxRate" index="3" />
+	            <attribute  name="taxAmount" index="4" />
+	         </sdd:key><!--  31100000 -->
+	      </sdd:key><!--  31000000 -->
+
+	      <sdd:key start-key="32000000" name="OCCAdjustments" separator="^">
+	         <attribute  name="occDescription" index="2" />
+	         <attribute  name="grossAmount" index="3" />
+	         <attribute  name="noOfEvents" index="4" />
+	      </sdd:key><!--  32000000 -->
+
+	      <sdd:key start-key="33000000" name="OCCTotalAmount" separator="^">
+	         <attribute  name="grossAmount" index="2" />
+	      </sdd:key><!--  33000000 -->
+
+	      <sdd:key start-key="34000000" name="FUPreviousBill" separator="^">
+	         <attribute  name="directoryNumber" index="2" />
+	         <attribute  name="contractNumber" index="3" />
+	         <attribute  name="fuPackageName" index="4" />
+	         <attribute  name="fuElemenID" index="5" />
+	         <attribute  name="fuElementVersion" index="6" />
+	         <attribute  name="fuMeasure" index="7" />
+	         <attribute  name="fuCarriedOverFromPrevious" index="8" />
+	         <attribute  name="fuOriginalAvailable" index="9" />
+	         <attribute  name="fuUsed" index="10" />
+	         <attribute  name="fuUnused" index="11" />
+	         <attribute  name="startDateOfAccountingPeriod" index="12" />
+	         <attribute  name="endDateOfAccountingPeriod" index="13" />
+	         <attribute  name="fuAccountId" index="14" />
+	         <attribute  name="fuAccountHistoryId" index="15" />
+	      </sdd:key><!--  34000000  -->
+
+	      <sdd:key start-key="34000100" name="FUCurrentBill" separator="^">
+	         <attribute  name="directoryNumber" index="2" />
+	         <attribute  name="contractNumber" index="3" />
+	         <attribute  name="fuPackageName" index="4" />
+	         <attribute  name="fuElemenID" index="5" />
+	         <attribute  name="fuElementVersion" index="6" />
+	         <attribute  name="fuMeasure" index="7" />
+	         <attribute  name="fuCarriedOverFromPrevious" index="8" />
+	         <attribute  name="fuOriginalAvailable" index="9" />
+	         <attribute  name="fuUsed" index="10" />
+	         <attribute  name="fuUnused" index="11" />
+	         <attribute  name="startDateOfAccountingPeriod" index="12" />
+	         <attribute  name="endDateOfAccountingPeriod" index="13" />
+	         <attribute  name="fuAccountId" index="14" />
+	         <attribute  name="fuAccountHistoryId" index="15" />
+	      </sdd:key><!-- 34000100 -->
+
+	      <sdd:key start-key="34010000" name="PromotionPackage" separator="^">
+	         <attribute  name="description" index="2" />
+
+	         <sdd:key start-key="34011000" name="Discounts" separator="^">
+	            <attribute  name="discountModelDescription" index="2" />
+	            <attribute  name="discountRate" index="3" />
+	            <attribute  name="totalDiscountAmount" index="4" />
+	            <sdd:key start-key="34011010" name="DiscountTaxes" separator="^">
+	               <attribute  name="taxName" index="2" />
+	               <attribute  name="taxRate" index="3" />
+	            </sdd:key><!-- 34011010 -->
+	         </sdd:key><!-- 34011000 -->
+
+	         <sdd:key start-key="34012000" name="MinimumCommitmentFees" separator="^">
+	            <attribute  name="discountModelDescription" index="2" />
+	            <attribute  name="minimumCommitmentFeeDescription" index="3" />
+	            <attribute  name="minimumCommitmentFeeAmount" index="4" />
+	            <attribute  name="noOfOccurrences" index="5" />
+	            <sdd:key start-key="34012000" name="MinimumCommitmentTaxes" separator="^">
+	               <attribute  name="taxName" index="2" />
+	               <attribute  name="taxRate" index="3" />
+	            </sdd:key><!-- 34012000 -->
+	         </sdd:key><!-- 34012000 -->
+	      </sdd:key><!--  34010000  -->
+
+	      <sdd:key start-key="34013010" name="RewardsRER" separator="^">
+	         <attribute  name="discountModelDescription" index="2" />
+	         <attribute  name="rewardConstantRER" index="3" />
+	         <attribute  name="bonusPointsNeeded" index="4" />
+	         <attribute  name="oldRatePlan" index="5" />
+	         <attribute  name="newRatePlan" index="6" />
+	      </sdd:key><!-- 34013010 -->
+
+	      <sdd:key start-key="34013020" name="RewardsRAT" separator="^">
+	         <attribute  name="discountModelDescription" index="2" />
+	         <attribute  name="rewardConstantRAT" index="3" />
+	         <attribute  name="advertisingText" index="4" />
+	         <attribute  name="bonusPointsNeeded" index="5" />
+	         <attribute  name="noOfOccurrences" index="6" />
+	      </sdd:key><!-- 34013020 -->
+
+	      <sdd:key start-key="34013030" name="RewardsRFR" separator="^">
+	         <attribute  name="discountModelDescription" index="2" />
+	         <attribute  name="rewardConstantRFR" index="3" />
+	         <attribute  name="bonusPointsNeeded" index="4" />
+	         <attribute  name="ratePlanDescription" index="5" />
+	         <attribute  name="serviceName" index="6" />
+	         <attribute  name="serviceAccessFee" index="7" />
+	      </sdd:key><!-- 34013030 -->
+
+	      <sdd:key start-key="34013040" name="RewardsRAC" separator="^">
+	         <attribute  name="discountModelDescription" index="2" />
+	         <attribute  name="rewardConstantRAC" index="3" />
+	         <attribute  name="bonusPointsNeeded" index="4" />
+	         <attribute  name="promotionPackageName" index="5" />
+	      </sdd:key><!-- 34013040 -->
+
+	      <sdd:key start-key="34013050" name="RewardsRDE" separator="^">
+	         <attribute  name="discountModelDescription" index="2" />
+	         <attribute  name="rewardConstantRDE" index="3" />
+	         <attribute  name="bonusPointsNeeded" index="4" />
+	         <attribute  name="promotionPackageName" index="5" />
+	      </sdd:key><!-- 34013050 -->
+
+	      <sdd:key start-key="34013060" name="RewardsRAD" separator="^">
+	         <attribute  name="discountModelDescription" index="2" />
+	         <attribute  name="rewardConstantRAD" index="3" />
+	         <attribute  name="bonusPointsNeeded" index="4" />
+	         <attribute  name="newPromotionPackageName" index="5" />
+	      </sdd:key><!-- 34013060 -->
+
+	      <sdd:key start-key="34013070" name="RewardsRRE" separator="^">
+	         <attribute  name="discountModelDescription" index="2" />
+	         <attribute  name="rewardConstantRRE" index="3" />
+	         <attribute  name="bonusPointsNeeded" index="4" />
+	         <attribute  name="promotionPackageName" index="5" />
+	      </sdd:key><!-- 34013070 -->
+
+	      <sdd:key start-key="34013080" name="RewardsREX" separator="^">
+	         <attribute  name="discountModelDescription" index="2" />
+	         <attribute  name="rewardConstantREX" index="3" />
+	         <attribute  name="bonusPointsNeeded" index="4" />
+	         <attribute  name="oldPromotionPackageName" index="5" />
+	      </sdd:key><!-- 34013080 -->
+
+	      <sdd:key start-key="34013090" name="RewardsFAD" separator="^">
+	         <attribute  name="discountModelDescription" index="2" />
+	         <attribute  name="rewardConstantFAD" index="3" />
+	         <attribute  name="bonusPointsNeeded" index="4" />
+	         <attribute  name="oldFreeUnitPackage" index="5" />
+	         <attribute  name="newFreeUnitPackage" index="6" />
+	         <attribute  name="fuServiceDescription" index="7" />
+	      </sdd:key><!-- 34013090 -->
+
+	      <sdd:key start-key="34014000" name="Bonus" separator="^">
+	         <attribute  name="discountModelDescription" index="2" />
+	         <attribute  name="totalGrantedPoints" index="3" />
+	      </sdd:key><!-- 34014000 -->
+
+	      <sdd:key start-key="34020000" name="TotalPoints" separator="^">
+	         <attribute  name="totalGrantedPoints" index="2" />
+	         <attribute  name="bonusPointsCustomerHas" index="3" />
+	         <attribute  name="maximumPoints" index="4" />
+	         <attribute  name="pointsToExpire" index="5" />
+	         <attribute  name="pointsUsedForRewards" index="6" />
+	      </sdd:key><!-- 34020000 -->
+
+	      <sdd:key start-key="34050000" name="TIMTotalAmount" separator="^">
+	         <attribute  name="invoiceAmountWithoutCoBilling" index="2" />
+	         <attribute  name="billAmountWithoutCoBilling" index="3" />
+	      </sdd:key><!-- 34050000 -->
+
+      </sdd:key><!-- NFHeader = 11200000 -->
+
+      <sdd:key start-key="34100000" name="LDCNFHeader" separator="^">
+         <attribute  name="sectionID" index="2" />
+         <attribute trim="false" name="carrierAddrName" index="3" />
+         <attribute  name="invoiceNumber" index="4" />
+         <attribute  name="carrierAddrStreet" index="5" />
+         <attribute  name="carrierAddrStreetNo" index="6" />
+         <attribute  name="carrierAddrComplement" index="7" />
+         <attribute  name="carrierAddrCity" index="8" />
+         <attribute  name="carrierAddrState" index="9" />
+         <attribute  name="carrierAddrZip" index="10" />
+         <attribute  name="carrierCNPJ" index="11" />
+         <attribute  name="carrierIE" index="12" />
+         <attribute  name="carrierCallCenterNumber" index="13" />
+
+         <sdd:key start-key="34100100" name="DigitalAuthKey" separator="^">
+            <attribute  name="digitalAuthKey" index="2" />
+         </sdd:key><!-- 34100100 -->
+
+         <sdd:key start-key="34101000" name="UsageGroups" separator="^">
+            <attribute  name="usageGroupName" index="2" />
+			<attribute  name="roamingIndicator" index="3" />
+            <attribute  name="usageGroupTotEvents" index="4" />
+            <attribute  name="usageGroupTotRoundedDuration" index="5" />
+            <attribute  name="usageGroupTotActualDuration" index="6" />
+            <attribute  name="usageGroupTotAmountAfterPromotionsDisc" index="7" />
+            <sdd:key start-key="34102000" name="UsageGroupsTaxes" separator="^">
+               <attribute  name="taxName" index="2" />
+               <attribute  name="taxRate" index="3" />
+               <attribute  name="taxAmount" index="4" />
+            </sdd:key><!-- 34102000 -->
+         </sdd:key><!-- 34101000 -->
+
+         <sdd:key start-key="34110000" name="OCCOther" separator="^">
+            <attribute  name="occDescription" index="2" />
+            <attribute  name="grossAmount" index="3" />
+            <attribute  name="noOfEvents" index="4" />
+            <sdd:key start-key="34115000" name="OCCTaxes" separator="^">
+               <attribute  name="taxName" index="2" />
+               <attribute  name="taxRate" index="3" />
+               <attribute  name="taxAmount" index="4" />
+            </sdd:key><!-- 34115000 -->
+         </sdd:key><!-- 34110000 -->
+
+         <sdd:key start-key="34116000" name="OCCSubscription" separator="^">
+            <attribute  name="occDescription" index="2" />
+            <attribute  name="grossAmount" index="3" />
+            <attribute  name="noOfEvents" index="4" />
+            <sdd:key start-key="34116100" name="occTaxes" separator="^">
+               <attribute  name="taxName" index="2" />
+               <attribute  name="taxRate" index="3" />
+               <attribute  name="taxAmount" index="4" />
+            </sdd:key><!-- 34116100 -->
+         </sdd:key><!-- 34116000 -->
+
+         <sdd:key start-key="34119000" name="OCCTotalAmount" separator="^">
+            <attribute  name="grossAmount" index="2" />
+         </sdd:key><!-- 34119000 -->
+
+         <sdd:key start-key="34121000" name="Services" separator="^">
+            <attribute  name="serviceName" index="2" />
+            <attribute  name="directoryNumber" index="3" />
+            <attribute  name="contractNumber" index="4" />
+            <attribute  name="noOfDays" index="5" />
+            <attribute  name="prorationFactor" index="6" />
+            <attribute  name="grossAmount" index="7" />
+            <sdd:key start-key="34120100" name="ServicesTaxes" separator="^">
+               <attribute  name="taxName" index="2" />
+               <attribute  name="taxRate" index="3" />
+               <attribute  name="taxAmount" index="4" />
+            </sdd:key><!-- 34120100 -->
+         </sdd:key><!-- 34121000 -->
+
+         <sdd:key start-key="34120200" name="ServicesSubTotal" separator="^">
+            <attribute  name="subTotalGrossAmount" index="2" />
+         </sdd:key><!-- 34120200 -->
+
+         <sdd:key start-key="34130000" name="FUPreviousBill" separator="^">
+            <attribute  name="directoryNumber" index="2" />
+            <attribute  name="contractNumber" index="3" />
+            <attribute  name="fuPackageName" index="4" />
+            <attribute  name="fuElemenID" index="5" />
+            <attribute  name="fuElementVersion" index="6" />
+            <attribute  name="fuMeasure" index="7" />
+            <attribute  name="fuCarriedOverFromPrevious" index="8" />
+            <attribute  name="fuOriginalAvailable" index="9" />
+            <attribute  name="fuUsed" index="10" />
+            <attribute  name="fuUnused" index="11" />
+            <attribute  name="startDateOfAccountingPeriod" index="12" />
+            <attribute  name="endDateOfAccountingPeriod" index="13" />
+            <attribute  name="fuAccountId" index="14" />
+            <attribute  name="fuAccountHistoryId" index="15" />
+         </sdd:key><!-- 34130000 -->
+
+         <sdd:key start-key="34130100" name="FUCurrentBill" separator="^">
+            <attribute  name="directoryNumber" index="2" />
+            <attribute  name="contractNumber" index="3" />
+            <attribute  name="fuPackageName" index="4" />
+            <attribute  name="fuElemenID" index="5" />
+            <attribute  name="fuElementVersion" index="6" />
+            <attribute  name="fuMeasure" index="7" />
+            <attribute  name="fuCarriedOverFromPrevious" index="8" />
+            <attribute  name="fuOriginalAvailable" index="9" />
+            <attribute  name="fuUsed" index="10" />
+            <attribute  name="fuUnused" index="11" />
+            <attribute  name="startDateOfAccountingPeriod" index="12" />
+            <attribute  name="endDateOfAccountingPeriod" index="13" />
+            <attribute  name="fuAccountId" index="14" />
+            <attribute  name="fuAccountHistoryId" index="15" />
+         </sdd:key><!-- 34130100 -->
+
+         <sdd:key start-key="34140000" name="PromotionPackage" separator="^">
+            <attribute  name="description" index="2" />
+
+            <sdd:key start-key="34141000" name="Discounts" separator="^">
+               <attribute  name="discountModelDescription" index="2" />
+               <attribute  name="discountRate" index="3" />
+               <attribute  name="totalDiscountAmount" index="4" />
+               <sdd:key start-key="34141010" name="DiscountTaxes" separator="^">
+                  <attribute  name="taxName" index="2" />
+                  <attribute  name="taxRate" index="3" />
+               </sdd:key><!-- 34141010 -->
+            </sdd:key><!-- 34141000 -->
+
+            <sdd:key start-key="34012000" name="MinimumCommitmentFees" separator="^">
+               <attribute  name="discountModelDescription" index="2" />
+               <attribute  name="minimumCommitmentFeeDescription" index="3" />
+               <attribute  name="minimumCommitmentFeeAmount" index="4" />
+               <attribute  name="noOfOccurrences" index="5" />
+               <sdd:key start-key="34012000" name="MinimumCommitmentTaxes" separator="^">
+                  <attribute  name="taxName" index="2" />
+                  <attribute  name="taxRate" index="3" />
+               </sdd:key><!-- 34012000 -->
+            </sdd:key><!-- 34012000 -->
+         </sdd:key><!--  34140000  -->
+
+         <sdd:key start-key="34143010" name="RewardsRER" separator="^">
+            <attribute  name="discountModelDescription" index="2" />
+            <attribute  name="rewardConstantRER" index="3" />
+            <attribute  name="bonusPointsNeeded" index="4" />
+            <attribute  name="oldRatePlan" index="5" />
+            <attribute  name="newRatePlan" index="6" />
+         </sdd:key><!-- 34143010 -->
+
+         <sdd:key start-key="34143020" name="RewardsRAT" separator="^">
+            <attribute  name="discountModelDescription" index="2" />
+            <attribute  name="rewardConstantRAT" index="3" />
+            <attribute  name="advertisingText" index="4" />
+            <attribute  name="nonusPointsNeeded" index="5" />
+            <attribute  name="noOfOccurrences" index="6" />
+         </sdd:key><!-- 34143020 -->
+
+         <sdd:key start-key="34143030" name="RewardsRFR" separator="^">
+            <attribute  name="discountModelDescription" index="2" />
+            <attribute  name="rewardConstantRFR" index="3" />
+            <attribute  name="bonusPointsNeeded" index="4" />
+            <attribute  name="ratePlanDescription" index="5" />
+            <attribute  name="serviceName" index="6" />
+            <attribute  name="serviceAccessFee" index="7" />
+         </sdd:key><!-- 34143030 -->
+
+         <sdd:key start-key="34143040" name="RewardsRAC" separator="^">
+            <attribute  name="discountModelDescription" index="2" />
+            <attribute  name="rewardConstantRAC" index="3" />
+            <attribute  name="bonusPointsNeeded" index="4" />
+            <attribute  name="promotionPackageName" index="5" />
+         </sdd:key><!-- 34143040 -->
+
+         <sdd:key start-key="34143050" name="RewardsRDE" separator="^">
+            <attribute  name="discountModelDescription" index="2" />
+            <attribute  name="rewardConstantRDE" index="3" />
+            <attribute  name="bonusPointsNeeded" index="4" />
+            <attribute  name="promotionPackageName" index="5" />
+         </sdd:key><!-- 34143050 -->
+
+         <sdd:key start-key="34143060" name="RewardsRAD" separator="^">
+            <attribute  name="discountModelDescription" index="2" />
+            <attribute  name="rewardConstantRAD" index="3" />
+            <attribute  name="bonusPointsNeeded" index="4" />
+            <attribute  name="newPromotionPackageName" index="5" />
+         </sdd:key><!-- 34143060 -->
+
+         <sdd:key start-key="34143070" name="RewardsRRE" separator="^">
+            <attribute  name="discountModelDescription" index="2" />
+            <attribute  name="rewardConstantRRE" index="3" />
+            <attribute  name="bonusPointsNeeded" index="4" />
+            <attribute  name="promotionPackageName" index="5" />
+         </sdd:key><!-- 34143070 -->
+
+         <sdd:key start-key="34143080" name="RewardsREX" separator="^">
+            <attribute  name="discountModelDescription" index="2" />
+            <attribute  name="rewardConstantREX" index="3" />
+            <attribute  name="bonusPointsNeeded" index="4" />
+            <attribute  name="oldPromotionPackageName" index="5" />
+         </sdd:key><!-- 34143080 -->
+
+         <sdd:key start-key="34143090" name="RewardsFAD" separator="^">
+            <attribute  name="discountModelDescription" index="2" />
+            <attribute  name="rewardConstantFAD" index="3" />
+            <attribute  name="bonusPointsNeeded" index="4" />
+            <attribute  name="oldFreeUnitPackage" index="5" />
+            <attribute  name="newFreeUnitPackage" index="6" />
+            <attribute  name="fuServiceDescription" index="7" />
+         </sdd:key><!-- 34143090 -->
+
+         <sdd:key start-key="34144000" name="Bonus" separator="^">
+            <attribute  name="discountModelDescription" index="2" />
+            <attribute  name="totalGrantedPoints" index="3" />
+         </sdd:key><!-- 34144000 -->
+
+         <sdd:key start-key="34200000" name="TotalLDCAmount" separator="^">
+            <attribute  name="totalLDCGrossAmount" index="2" />
+         </sdd:key><!-- 34200000 -->
+
+         <sdd:key start-key="34400000" name="TaxSummary" separator="^">
+            <attribute  name="taxName" index="2" />
+            <attribute  name="taxRate" index="3" />
+            <attribute  name="baseGrossAmount" index="4" />
+            <attribute  name="taxAmount" index="5" />
+         </sdd:key><!-- 34400000 -->
+      </sdd:key><!-- 34100000 -->
+
+      <sdd:key start-key="35000000" name="TaxSummary" separator="^">
+         <attribute  name="taxName" index="2" />
+         <attribute  name="taxRate" index="3" />
+         <attribute  name="baseGrossAmount" index="4" />
+         <attribute  name="taxAmount" index="5" />
+      </sdd:key><!-- 35000000 -->
+
+      <sdd:key start-key="39000000" name="RetentionTaxes" separator="^">
+         <attribute  name="taxName" index="2" />
+         <attribute  name="taxRate" index="3" />
+         <attribute  name="baseGrossAmount" index="4" />
+         <attribute  name="taxAmount" index="5" />
+      </sdd:key>
+
+      <sdd:key start-key="40000000" name="PayStubInformation" separator="^">
+         <attribute  name="sectionID" index="2" />
+         <attribute  name="financeMessage1" index="3" />
+         <attribute  name="financeMessage2" index="4" />
+         <attribute  name="financeMessage3" index="5" />
+         <attribute  name="csrNumber" index="6" />
+         <attribute  name="operatorAddrName" index="7" />
+         <attribute  name="operatorAddrStreet" index="8" />
+         <attribute  name="operatorAddrStreetNo" index="9" />
+         <attribute  name="operatorAddrZip" index="10" />
+         <attribute  name="operatorAddrCity" index="11" />
+         <attribute  name="operatorAddrState" index="12" />
+         <attribute  name="clientName" index="13" />
+         <attribute  name="custCode" index="14" />
+         <attribute  name="billPeriodStart" index="15" />
+         <attribute  name="billPeriodEnd" index="16" />
+         <attribute  name="issueDate" index="17" />
+         <attribute  name="dueDate" index="18" />
+         <attribute  name="negativeInvoiceInd" index="19" />
+         <attribute  name="totalAmountDue" index="20" />
+         <attribute  name="previousBalance" index="21" />
+         <attribute  name="finalBalance" index="22" />
+         <attribute  name="autoDebitInd" index="23" />
+         <attribute  name="autoDebitCodeAutomatic" index="24" />
+         <attribute  name="bankCode" index="25" />
+         <attribute  name="bankName" index="26" />
+         <attribute  name="bankBranch" index="26" />
+         <attribute  name="bankAccountNumber" index="26" />
+
+         <sdd:key start-key="40000200" name="InvoiceIdentification" separator="^">
+            <attribute  name="invoiceIdentification" index="2" />
+         </sdd:key>
+
+         <sdd:key start-key="40000300" name="BarCode" separator="^">
+            <attribute  name="barCode" index="2" />
+         </sdd:key>
+
+         <sdd:key start-key="41000000" name="Payments" separator="^">
+            <attribute  name="transactionType" index="2" />
+            <attribute  name="transactionDate" index="3" />
+            <attribute  name="transactionAmount" index="4" />
+            <sdd:key start-key="41000100" name="PaymentsTotal" separator="^">
+               <attribute  name="totalPaymentsAmount" index="2" />
+            </sdd:key><!--  41000100  -->
+         </sdd:key><!--  41000000  -->
+
+         <sdd:key start-key="41000200" name="OtherMonetaryTransactions" separator="^">
+            <attribute  name="transactionType" index="2" />
+            <attribute  name="transactionDate" index="3" />
+            <attribute  name="transactionAmount" index="4" />
+            <sdd:key start-key="41000300" name="PaymentsTotal" separator="^">
+               <attribute  name="totalOthersAmount" index="" />
+            </sdd:key><!--  41000300  -->
+         </sdd:key><!--  41000200  -->
+
+         <sdd:key start-key="41000400" name="MonetaryTransactions" separator="^">
+            <attribute  name="totalMonetaryAmount" index="2" />
+         </sdd:key><!--  41000400  -->
+
+      </sdd:key><!-- 40000000 -->
+
+      <sdd:key start-key="50000000" name="Details" separator="^">
+         <attribute  name="sectionID" index="2" />
+         <attribute  name="customerName" index="3" />
+         <attribute  name="custCode" index="4" />
+         <attribute  name="billingPeriodStart" index="5" />
+         <attribute  name="billingPeriodEnd" index="6" />
+         <attribute  name="cutOffSDate" index="7" />
+         <attribute  name="dueDate" index="8" />
+         <attribute  name="totalAmount" index="9" />
+
+         <sdd:key start-key="51000000" name="ContractInfo" separator="^">
+            <attribute  name="directoryNumber" index="2" />
+            <attribute  name="contractNumber" index="3" />
+            <attribute  name="ratePlan" index="4" />
+            <attribute  name="userName" index="5" />
+            <!-- added in Melhorias#02 (01/JUN/2009) -->
+            <attribute  name="codigoAnatel" index="6" />
+            <attribute  name="rateplanShdes" index="7" />
+            <!-- end of Melhorias#02 -->
+
+			<!-- Only for STFC contracts -->
+			<sdd:key start-key="51001000" name="InstallAddress">
+				<attribute  name="InstallAddrStreet" index="2"/>
+				<attribute  name="InstallAddrState" index="3"/>
+				<attribute  name="InstallAddrZip" index="4"/>
+				<attribute  name="InstallAddrStreetNo" index="5"/>
+				<attribute  name="InstallAddrComplement" index="6"/>
+				<attribute  name="InstallAddrCity" index="7"/>
+				<attribute  name="InstallAddrCounty" index="8"/>
+			</sdd:key>
+
+            <sdd:key start-key="51100000" name="UsageGroup" separator="^">
+               <attribute  name="groupName" index="2" />
+               <attribute  name="sessionIndicator" index="3" />
+               <attribute  name="groupIndicator" index="4" />
+
+               <sdd:key start-key="51110000" name="OneCall" separator="^">
+                  <attribute  name="callDate" index="2" />
+                  <attribute  name="callTime" index="3" />
+                  <attribute  name="callOrigin" index="4" />
+                  <attribute  name="callDestination" index="5" />
+                  <attribute  name="destinationNumber" index="6" />
+                  <attribute  name="tariffTimeIndicator" index="7" />
+                  <attribute  name="typeOfCall" index="8" />
+                  <attribute  name="callDurationRounded" index="9" />
+                  <attribute  name="callDuration" index="10" />
+                  <attribute  name="amountBeforePromotionsDisc" index="11" />
+                  <attribute  name="serviceShortDescr" index="12" />
+                  <attribute  name="tariffZoneShortDescr" index="13" />
+                  <attribute  name="networkIndicator" index="14" />
+                  <attribute  name="typeOfNumber" index="15" />
+                  <attribute  name="terminationInd" index="16" />
+                  <attribute  name="freeUnitsDiscountAmount" index="17" />
+                  <attribute  name="fuIndicator" index="18" />
+                  <attribute  name="microCellShortDescr" index="19" />
+                  <attribute  name="microCellScalingFactor" index="20" />
+                  <attribute  name="cspBGH" index="21" />
+                  <attribute  name="ldcCallIdentificationNumber" index="22" />
+                  <attribute  name="amountAfterPromotionsDisc" index="23" />
+                  <attribute  name="promotionsDiscAmount" index="24" />
+
+                  <sdd:key start-key="51110010" name="TaxesOneCall" separator="^">
+                     <attribute  name="taxName" index="2" />
+                     <attribute  name="taxRate" index="3" />
+                  </sdd:key><!-- 51110010 -->
+
+                  <sdd:key start-key="51110020" name="FUDetail" separator="^">
+                     <attribute  name="fuAccountID" index="2" />
+                     <attribute  name="fuAccountHistoryID" index="3" />
+                     <attribute  name="fuPackageDescShort" index="4" />
+                     <attribute  name="fuPackageDescLong" index="5" />
+                     <attribute  name="fuElemenID" index="6" />
+                     <attribute  name="fuElementVersion" index="7" />
+                     <attribute  name="ratedCallTimeReduction" index="8" />
+                     <attribute  name="roundedCallTimeReduction" index="9" />
+                     <attribute  name="fuMeasure" index="10" />
+                     <attribute  name="clicksReduction" index="11" />
+                     <attribute  name="moneyReduction" index="12" />
+                  </sdd:key><!-- 51110020 -->
+
+                  <sdd:key start-key="51110030" name="PromotionPackage" separator="^">
+                     <attribute  name="packageType" index="2" />
+                     <attribute  name="packageDescShort" index="3" />
+                     <attribute  name="packageDescLong" index="4" />
+                     <attribute  name="packageAmount" index="5" />
+                  </sdd:key><!-- 51110030 -->
+
+               </sdd:key><!-- 51110000 -->
+
+               <sdd:key start-key="51120000" name="UsageGroupSubtotal" separator="^">
+                  <attribute  name="subtotalRoundedCallDuration" index="2" />
+                  <attribute  name="subtotalActualCallDuration" index="3" />
+                  <attribute  name="subTotalAmountBeforePromotionsDisc" index="4" />
+                  <attribute  name="subTotalAmountAfterPromotionsDisc" index="5" />
+                  <attribute  name="quantity" index="6" />
+                  <attribute  name="subTotalFreeUnitsDiscAmount" index="7" />
+                  <attribute  name="subTotalPromotionsDiscAmount" index="8" />
+               </sdd:key><!-- 51120000 -->
+
+            </sdd:key><!-- 51100000 -->
+
+            <sdd:key start-key="51190000" name="ContractUsageTotalBytes" separator="^">
+               <attribute  name="subTotalRoundedVolumeUsed" index="2" />
+               <attribute  name="subTotalVolumeUsed" index="3" />
+               <attribute  name="subTotalAmountBeforePromotionsDisc" index="4" />
+               <attribute  name="subTotalAmountAfterPromotionsDisc" index="5" />
+               <attribute  name="quantity" index="6" />
+               <attribute  name="subTotalFreeUnitsDiscAmount" index="7" />
+               <attribute  name="subTotalPromotionsDiscAmount" index="8" />
+            </sdd:key><!-- 51190000 -->
+
+            <sdd:key start-key="51190010" name="ContractUsageTotalMessages" separator="^">
+               <attribute  name="subTotalAmountBeforePromotionsDisc" index="2" />
+               <attribute  name="subTotalAmountAfterPromotionsDisc" index="3" />
+               <attribute  name="quantity" index="4" />
+               <attribute  name="subTotalFreeUnitsDiscAmount" index="5" />
+               <attribute  name="subTotalPromotionsDiscAmount" index="6" />
+            </sdd:key><!-- 51190010 -->
+
+            <sdd:key start-key="51200000" name="ContractUsageTotalSeconds" separator="^">
+               <attribute  name="subTotalRoundedVolumeUsed" index="2" />
+               <attribute  name="subTotalVolumeUsed" index="3" />
+               <attribute  name="subTotalAmountBeforePromotionsDisc" index="4" />
+               <attribute  name="subTotalAmountAfterPromotionsDisc" index="5" />
+               <attribute  name="quantity" index="6" />
+               <attribute  name="subTotalFreeUnitsDiscAmount" index="7" />
+               <attribute  name="subTotalPromotionsDiscAmount" index="8" />
+            </sdd:key><!-- 51200000 -->
+
+         </sdd:key><!-- 51000000 -->
+
+      </sdd:key><!-- 50000000 -->
+
+      <sdd:key start-key="60000000" name="ContractSubscription" separator="^">
+         <attribute  name="directoryNumber" index="2" />
+         <attribute  name="contractNumber" index="3" />
+         <attribute  name="subtotal" index="4" />
+      </sdd:key><!-- 60000000 -->
+
+      <sdd:key start-key="60000100" name="ContractServices" separator="^">
+         <attribute  name="directoryNumber" index="2" />
+         <attribute  name="contractNumber" index="3" />
+         <attribute  name="subtotal" index="4" />
+      </sdd:key><!-- 60000100 -->
+
+      <sdd:key start-key="60000200" name="ContractOCC" separator="^">
+         <attribute  name="directoryNumber" index="2" />
+         <attribute  name="contractNumber" index="3" />
+         <attribute  name="subtotal" index="4" />
+      </sdd:key><!-- 60000200 -->
+
+      <sdd:key start-key="60000300" name="ContractDiscounts" separator="^">
+         <attribute  name="directoryNumber" index="2" />
+         <attribute  name="contractNumber" index="3" />
+         <attribute  name="subtotal" index="4" />
+      </sdd:key><!-- 60000300 -->
+
+      <sdd:key start-key="60000400" name="ContractFU" separator="^">
+         <attribute  name="directoryNumber" index="2" />
+         <attribute  name="contractNumber" index="3" />
+         <attribute  name="FUTotals" index="4" />
+      </sdd:key><!-- 60000400 -->
+
+      <sdd:key start-key="60000600" name="ContractTotal" separator="^">
+         <attribute  name="directoryNumber" index="2" />
+         <attribute  name="contractNumber" index="3" />
+         <attribute  name="subtotal" index="4" />
+      </sdd:key><!-- 60000600 -->
+
+      <sdd:key start-key="60900000" name="TotalOCCsDirectlyAttachedToCustomer" separator="^">
+         <attribute  name="totalAmount" index="2" />
+      </sdd:key><!-- 60900000 -->
+
+      <sdd:key start-key="60900100" name="TotalAdjustmentsApplyedToCustomer" separator="^">
+         <attribute  name="totalAmount" index="2" />
+      </sdd:key><!-- 60900100 -->
+
+      <sdd:key start-key="61000000" name="InvoiceTotal" separator="^">
+         <attribute  name="invoiceTotal" index="2" />
+      </sdd:key><!-- 61000000 -->
+
+   </sdd:key>
+   <!-- GeneralInformation = 00000000-->
+   <sdd:key start-key="99999999" name="endOfFile" skip="true" />
+
+</sdd:document>
+
+

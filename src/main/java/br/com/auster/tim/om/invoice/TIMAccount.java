@@ -1,0 +1,55 @@
+/*
+ * Copyright (c) 2004-2007 Auster Solutions. All Rights Reserved.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * Created on 08/02/2007
+ */
+package br.com.auster.tim.om.invoice;
+
+import br.com.auster.om.invoice.Account;
+import br.com.auster.om.invoice.Address;
+
+/**
+ * This class was created since addresses, in Account core class, are not 
+ * 	easly handled in Drools rules.
+ * 
+ * @author framos
+ * @version $Id$
+ *
+ */
+public class TIMAccount extends Account {
+
+	
+	private int taxCategory;
+	
+	public static final String ACCOUNT_ADDRESS_TYPE = "account.addr";
+	
+	
+	public void setCarrierAddress(Address _addr) {
+		_addr.setAddressType(ACCOUNT_ADDRESS_TYPE);
+		this.addAddress(_addr);
+	}
+	
+	public Address getCarrierAddress() {
+		return this.getAddress(ACCOUNT_ADDRESS_TYPE);
+	}
+	
+	
+	public final int getTaxCategory() {
+		return this.taxCategory;
+	}
+	public final void setTaxCategory(int _tax) {
+		this.taxCategory = _tax;
+	}
+}
